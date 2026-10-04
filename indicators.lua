@@ -58,7 +58,7 @@ if not next(SMODS.find_mod("paperback")) then
   local function should_draw_indicator(card, key)
     return card and card.ability
         and type(card.ability[key]) == "number"
-        and card.ability[key] ~= 0
+        and ((string.find(key, "blind_size") and card.ability[key] < 0) or (not string.find(key, "blind_size") and card.ability[key] > 0)) -- why
         and card.area and card.area.config.type ~= 'deck'
         and card.facing == 'front'
   end
